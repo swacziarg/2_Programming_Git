@@ -17,7 +17,6 @@ import java.util.*;
 public class Index {
 	
 	HashMap<String, String> blobMap = new HashMap<String, String>();
-	FileWriter fw;
 	String location;
 	File index;
 	
@@ -45,11 +44,17 @@ public class Index {
 		out.close();
 	}
 	
-	public void remove(String fileName)
+	public void remove(String fileName) throws IOException
 	{
-		File toDelete = new File(blobMap.get(fileName)); 
+		File toDelete = new File("./objects/" + blobMap.get(fileName)); 
 		toDelete.delete();
 	    blobMap.remove(fileName);
+	    PrintWriter out = new PrintWriter(new FileWriter(index));
+		for(String key : blobMap.keySet())
+		{
+			out.write(key + " : " + blobMap.get(key) + "\n");
+		}
+		out.close();
 
 	}
 
