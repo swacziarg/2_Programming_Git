@@ -6,15 +6,44 @@ import java.io.IOException;
 import java.util.Formatter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-public class Blob {
+public class Blob 
+{
 
+	String content;
+	String sha1;
 	
-	
-	public Blob(String inputFile)
+	public Blob(String inputFile) throws IOException
 	{
+		BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+		StringBuilder sb = new StringBuilder("");
+		
+		// Reads off the file and creates a StringBuilder storing the content.
+		while(reader.ready())
+		{
+			char nextLetter = (char)reader.read();
+			sb.append(nextLetter);
+			
+		}
+		reader.close();
+		
+		// Generate SHA-1 based on the content.
+		content = sb.toString();
+		sha1 = generateSHA1(content);
+		
+		// Create file with the SHA-1 name and write the content.
+		Path p = Paths.get(sha1 + ".txt");
+        try {
+            Files.writeString(p, content, StandardCharsets.ISO_8859_1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		
 	}
 
