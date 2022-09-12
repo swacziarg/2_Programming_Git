@@ -38,7 +38,7 @@ public class Blob
 		sha1 = generateSHA1(content);
 		
 		// Create file with the SHA-1 name and write the content.
-		Path p = Paths.get(sha1 + ".txt");
+		Path p = Paths.get("./objects/" + sha1);
         try {
             Files.writeString(p, content, StandardCharsets.ISO_8859_1);
         } catch (IOException e) {
