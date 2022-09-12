@@ -40,8 +40,9 @@ public class Index {
 		PrintWriter out = new PrintWriter(new FileWriter(index));
 		for(String key : blobMap.keySet())
 		{
-			out.write(key + " : " + blobMap.get(key));
+			out.write(key + " : " + blobMap.get(key) + "\n");
 		}
+		out.close();
 	}
 	
 	public void remove(String fileName)
