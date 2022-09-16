@@ -82,8 +82,16 @@ public class Index {
         }
         
         BufferedWriter writer = new BufferedWriter(new FileWriter("objects" + "\\" +hashtext));
-        writer.write(s.toString());
-    
+        int count = 0;
+        for (String b : s) {
+        	if (count>0) {
+        		writer.write("\n");
+        	}
+        	count++;
+        	writer.write(b);
+        	
+        	
+        }
         writer.close();
         
 	}
