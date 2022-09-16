@@ -60,8 +60,17 @@ public class Index {
 
 	}
 	public void Tree(ArrayList<String> s) throws NoSuchAlgorithmException, IOException {
-		String str = s.toString();
-		
+		String str = "";
+		int count = 0;
+        for (String b : s) {
+        	if (count>0) {
+        		str +=("\n");
+        	}
+        	count++;
+        	str+= b;
+        	
+        	
+        }
 		
 		MessageDigest md = MessageDigest.getInstance("SHA-1");
 		 
@@ -82,16 +91,7 @@ public class Index {
         }
         
         BufferedWriter writer = new BufferedWriter(new FileWriter("objects" + "\\" +hashtext));
-        int count = 0;
-        for (String b : s) {
-        	if (count>0) {
-        		writer.write("\n");
-        	}
-        	count++;
-        	writer.write(b);
-        	
-        	
-        }
+        writer.write(str);
         writer.close();
         
 	}
